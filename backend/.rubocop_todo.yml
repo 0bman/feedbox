@@ -1,0 +1,10 @@
+Style/ClassAndModuleChildren:
+  Enabled: false
+Metrics/LineLength:
+  Max: 80
+Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
