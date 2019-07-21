@@ -8,3 +8,7 @@ Metrics/BlockLength:
   Enabled: false
 RSpec/AnyInstance:
   Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
