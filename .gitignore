@@ -1,0 +1,101 @@
+# Logs
+/frontend/logs
+/frontend/*.log
+
+# Runtime data
+/frontend/pids
+/frontend/*.pid
+/frontend/*.seed
+/frontend/*.pid.lock
+
+/frontend/lib-cov
+/frontend/coverage
+/frontend/.nyc_output
+
+/frontend/.lock-wscript
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+/frontend/build/Release
+
+# Dependency directories
+/frontend/node_modules/
+/frontend/jspm_packages/
+
+# Optional npm cache directory
+/frontend/.npm
+
+# Optional eslint cache
+/frontend/.eslintcache
+
+# Optional REPL history
+/frontend/.node_repl_history
+
+# Output of 'npm pack'
+/frontend/*.tgz
+
+# gatsby files
+/frontend/.cache/
+/frontend/public
+
+# Mac files
+/frontend/.DS_Store
+
+# Yarn
+/frontend/yarn-error.log
+/frontend/.pnp/
+/frontend/.pnp.js
+# Yarn Integrity file
+/frontend/.yarn-integrity
+
+# testing
+/frontend/coverage
+/backend/coverage
+/backend/spec/examples.txt
+
+# production
+/frontend/build
+
+# secrets
+/frontend/.env
+/backend/.env
+/backend/config/application.yml
+
+# misc
+dump.rdb
+tags
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/frontend/tree.js
+/frontend/jest.template.js
+
+# logs
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+*.log
+
+.idea/
+
+# public
+/backend/public/image_uploads/*
+/backend/public/document_uploads/*
+/backend/public/video_uploads/*
+/backend/public/uploads/*
+!/backend/public/image_uploads/default
+
+/backend/.bundle
+
+/backend/log/*
+/backend/tmp/*
+/backend/!log/.keep
+/backend/!tmp/.keep
+
+/backend/storage/*
+/backend/!storage/.keep
+
+/backend/.byebug_history
+
+/backend/config/master.key
