@@ -1,21 +1,41 @@
-import React from "react"
-import { Link } from "gatsby"
+import Link from 'next/link'
+import fetch from 'isomorphic-unfetch'
+import PropTypes from 'prop-types'
+import Layout from '../components/MyLayout'
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
-
-const IndexPage = () => (
+const Index = (props) => (
   <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Batman TV Shows</h1>
+    <ul>
+      {props.shows.map((show) => (
+        <li key={show.id}>
+          <Link as={`/p/${show.id}`} href='/p/[id]'>
+            <a>{show.name}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
   </Layout>
 )
 
-export default IndexPage
+Index.getInitialProps = async () => {
+  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+  const data = await res.json()
+
+  // console.log(`Show data fetched. Count: ${data.length}`)
+
+  return {
+    shows: data.map((entry) => entry.show)
+  }
+}
+
+Index.propTypes = {
+  shows: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired
+}
+
+export default Index

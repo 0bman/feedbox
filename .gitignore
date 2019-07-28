@@ -33,9 +33,7 @@
 # Output of 'npm pack'
 /frontend/*.tgz
 
-# gatsby files
-/frontend/.cache/
-/frontend/public
+/frontend/src/.next/
 
 # Mac files
 /frontend/.DS_Store

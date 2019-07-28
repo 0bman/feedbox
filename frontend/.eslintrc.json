@@ -1,0 +1,67 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "ecmaVersion": 7,
+      "jsx": true
+    }
+  },
+  "extends": ["plugin:prettier/recommended", "airbnb"],
+  "rules": {
+    "prettier/prettier": "error",
+    "arrow-body-style": 0,
+    "arrow-parens": 0,
+    "camelcase": [0, { "properties": "never" }],
+    "class-methods-use-this": 0,
+    "comma-dangle": [2, "never"],
+    "function-paren-newline": ["error", "consistent"],
+    "global-require": 0,
+    "import/no-cycle": 0,
+    "import/no-dynamic-require": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "indent": ["error", 2],
+    "jsx-a11y/anchor-is-valid": [2, {
+      "components": ["Link"],
+      "specialLink": ["hrefLeft", "hrefRight", "to"],
+      "aspects": ["invalidHref", "preferButton"]
+    }],
+    "jsx-quotes": [2, "prefer-single"],
+    "no-shadow": 0,
+    "max-len": [2, { "code": 120 }],
+    "no-confusing-arrow": 0,
+    "no-multi-spaces": 2,
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-unused-expressions": 0,
+    "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
+    "no-unused-vars": [2, { "ignoreRestSiblings": true }],
+    "no-console": 2,
+    "object-curly-newline": 0,
+    "one-var": [2, "never"],
+    "operator-linebreak": [1, "after", {
+      "overrides": { "?": "before", ":": "before" } }
+    ],
+    "react/react-in-jsx-scope": 0,
+    "radix": 0,
+    "react/require-default-props": 0,
+    "react/forbid-prop-types": 0,
+    "react/default-props-match-prop-types": 0,
+    "react/destructuring-assignment": 0,
+    "react/no-direct-mutation-state": 2,
+    "react/jsx-filename-extension": [2, {"extensions": [".js", ".jsx"]}],
+    "react/jsx-max-depth": [1, { "max": 6 }],
+    "react/jsx-max-props-per-line": [1, { "maximum": 5 }],
+    "react/jsx-no-bind": 1,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-sort-props": 1,
+    "react/prop-types": ["error", { "ignore": ["dispatch"] }],
+    "react/no-deprecated": 2,
+    "react/no-redundant-should-component-update": 2,
+    "semi": [2, "never"]
+  }
+}
