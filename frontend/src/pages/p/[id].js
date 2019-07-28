@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
-import Layout from '../../components/MyLayout'
+import Layout from '../../components/layout'
 
 const Post = (props) => (
   <Layout>

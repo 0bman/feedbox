@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
-import Header from './Header'
+import Header from '../Header'
 
-import './layout.css'
+import './grid.scss'
+import './index.scss'
 
 const layoutStyle = {
   margin: 20,

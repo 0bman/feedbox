@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import fetch from 'isomorphic-unfetch'
 import PropTypes from 'prop-types'
-import Layout from '../components/MyLayout'
+import Layout from '../components/layout'
 
 const Index = (props) => (
   <Layout>
@@ -32,7 +32,7 @@ Index.getInitialProps = async () => {
 Index.propTypes = {
   shows: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired
     }).isRequired
   ).isRequired

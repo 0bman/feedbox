@@ -9,8 +9,11 @@
     "build": "next build ./src",
     "start": "next start ./src -p 4000",
     "export": "next export ./src",
-    "lint": "prettier --write src/**/*.{js,jsx}",
-    "eslint": "eslint ./src"
+    "lint": "prettier --write src/**/*.{js,jsx} src/**/**/*.{js,jsx} src/**/**/**/*.{js,jsx}",
+    "eslint": "eslint ./src",
+    "eslint-fix": "eslint ./src --fix",
+    "slint": "stylelint ./src/**/*.scss",
+    "slint-fix": "stylelint ./src/**/*.scss --fix"
   },
   "dependencies": {
     "@blueprintjs/core": "^3.17.1",

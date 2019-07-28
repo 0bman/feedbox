@@ -1,0 +1,26 @@
+/* helpers */
+.w-100 {
+  width: 100%;
+}
+
+main {
+  padding: 30px;
+}
+.example {
+  padding: 30px 30px 15px;
+  border: 2px seashell solid;
+  margin-bottom: 30px;
+}
+.example [class^='col'] {
+  padding-top: calc(var(--grid-gutter-width) / 2);
+  padding-bottom: calc(var(--grid-gutter-width) / 2);
+  background: bisque;
+  border: 1px sandybrown solid;
+}
+.example .row {
+  margin-bottom: 15px;
+}
+.example [class^='row align'] {
+  min-height: 10rem;
+  background: antiquewhite;
+}
