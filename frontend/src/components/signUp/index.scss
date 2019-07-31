@@ -1,0 +1,30 @@
+// .container {
+//   max-width: 960px;
+//   margin: 0 auto;
+// }
+
+// .column {
+//   --columns: 12; /* number of columns in the grid system */
+//   --width: var(--width-mobile, 0); /* width of the element */
+
+//   flex-basis: calc(var(--width) / var(--columns) * 100%);
+// }
+
+// @media (min-width: 768px) {
+//   .column {
+//     --width-desktop: var(--width-tablet);
+//     --width: var(--width-desktop);
+//   }
+// }
+
+// .form {
+//   // --width-mobile: 12;
+//   // --width-tablet: 6;
+//   --width-desktop: 6;
+// }
+
+// .content {
+//   // --width-mobile: 12;
+//   // --width-tablet: 6;
+//   --width-desktop: 6;
+// }
