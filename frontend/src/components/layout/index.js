@@ -1,20 +1,18 @@
 import PropTypes from 'prop-types'
 import Header from '../Header'
+import Menu from '../Menu'
+import Footer from '../Footer'
 
 import './grid.scss'
 import './index.scss'
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-}
-
 const Layout = (props) => {
   return (
-    <div style={layoutStyle}>
+    <div className='app-layout'>
+      <Menu />
       <Header />
-      {props.children}
+      <div className='content'>{props.children}</div>
+      <Footer />
     </div>
   )
 }

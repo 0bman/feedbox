@@ -1,0 +1,46 @@
+.bp3-drawer-header {
+  box-shadow: none;
+}
+
+.drawer {
+  margin: 0 auto;
+  max-width: 654px;
+}
+
+.drawer__form_group {
+  label {
+    font-weight: 700;
+    color: black;
+  }
+
+  span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #757575;
+  }
+}
+
+.drawer__sub {
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 1.4em;
+  margin-top: 0.5rem;
+  max-width: 624px;
+  text-transform: none;
+}
+
+.drawer__sub_size_m {
+  font-size: 1.25rem;
+}
+
+.drawer__sub_color_gray {
+  color: #757575;
+}
+
+.drawer__form {
+  margin: 3rem 0;
+}
+
+.drawer__submit_btn {
+  margin-right: 15px;
+}

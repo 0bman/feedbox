@@ -1,7 +1,7 @@
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Intent, Spinner } from '@blueprintjs/core'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 import ErrorMessage from '../components/ErrorMessage'
 

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_170233) do
+ActiveRecord::Schema.define(version: 2019_08_01_204913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "nodes", force: :cascade do |t|
+    t.boolean "has_caret", default: true, null: false
+    t.string "label", null: false
+    t.integer "secondary_label"
+    t.boolean "is_expanded", default: true, null: false
+    t.string "icon"
+    t.boolean "disabled", default: false, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_nodes_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false

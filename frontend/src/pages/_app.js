@@ -1,5 +1,6 @@
 import App, { Container } from 'next/app'
-import { ApolloProvider } from 'react-apollo'
+import { FocusStyleManager } from '@blueprintjs/core'
+import { ApolloProvider } from '@apollo/react-hooks'
 import withApollo from '../lib/withApollo' // eslint-disable-line
 
 import 'normalize.css/normalize.css'
@@ -8,6 +9,8 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 
 class MyApp extends App {
   render() {
+    FocusStyleManager.onlyShowFocusOnTabs()
+
     const { Component, pageProps, apolloClient } = this.props
 
     return (
