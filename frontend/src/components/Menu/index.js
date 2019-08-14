@@ -1,9 +1,10 @@
-import { Icon, Intent, Tree } from '@blueprintjs/core'
+import { Icon, Intent } from '@blueprintjs/core'
 import { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import appToaster from '../AppToaster'
 import Tabs from './Tabs'
+import Tree from './Tree'
 import DrawerModal from './DrawerModal'
 
 import './index.scss'
@@ -45,11 +46,6 @@ const Menu = () => {
     setToggleDrawer(!isDrawerOpen)
   }
 
-  const onNodeClick = () => {
-    // nodeData, _nodePath, e
-    // console.log(nodeData)
-  }
-
   const onNodeCollapse = (nodeData) => {
     updateNode({ variables: { ...nodeData, isExpanded: false } })
   }
@@ -76,10 +72,11 @@ const Menu = () => {
         <DrawerModal {...{ isDrawerOpen, handleToggleDrawer, createNode }} />
         <Tree
           {...{
-            onNodeClick,
             onNodeCollapse,
             onNodeExpand,
             contents: nodes,
+            baseUrl: '/nodes',
+            param: 'id',
             className:
               'tree__node tree__node_hover_cursor_pointer tree__node_hover'
           }}

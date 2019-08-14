@@ -11,8 +11,11 @@
       "jsx": true
     }
   },
+  "plugins": ["react-hooks"],
   "extends": ["airbnb"],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "arrow-body-style": 0,
     "arrow-parens": 0,
     "camelcase": [0, { "properties": "never" }],

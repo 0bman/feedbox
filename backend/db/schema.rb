@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_204913) do
+ActiveRecord::Schema.define(version: 2019_08_13_141118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "feeds", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "favicon"
+    t.string "url", null: false
+    t.string "rss_url", null: false
+    t.string "title"
+    t.string "description"
+    t.string "scheme"
+    t.string "keywords"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rss_url"], name: "index_feeds_on_rss_url", unique: true
+    t.index ["url"], name: "index_feeds_on_url", unique: true
+  end
 
   create_table "nodes", force: :cascade do |t|
     t.boolean "has_caret", default: true, null: false

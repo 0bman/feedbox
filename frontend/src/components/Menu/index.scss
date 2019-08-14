@@ -37,6 +37,7 @@
 
 .tree__node {
   .bp3-tree-node-content {
+    color: inherit;
     padding-left: 20px;
   }
 }
@@ -55,6 +56,7 @@
   .bp3-tree-node.bp3-tree-node-selected > .bp3-tree-node-content {
     background-color: rgb(235, 235, 235);
     color: inherit;
+    font-weight: bold;
 
     .bp3-tree-node-caret {
       color: #5c7080;

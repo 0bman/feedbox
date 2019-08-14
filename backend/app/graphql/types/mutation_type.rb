@@ -6,5 +6,6 @@ module Types
     field :sign_in, mutation: Mutations::SessionCreate
     field :create_node, mutation: Mutations::NodeCreate
     field :update_node, mutation: Mutations::NodeUpdate
+    field :create_feed, mutation: Mutations::FeedCreate
   end
 end
