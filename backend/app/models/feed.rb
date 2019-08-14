@@ -2,7 +2,7 @@
 
 class Feed < ApplicationRecord
   validate :site_should_include_rss
-  validates :name, :url, :rss_url, presence: true
+  validates :name, :url, presence: true
   validates :url, :rss_url, uniqueness: true
 
   def set_info_from_url!
@@ -11,10 +11,18 @@ class Feed < ApplicationRecord
     self
   end
 
+  def name=(val)
+    super(val || url.titleize.split('.').join)
+  end
+
   def url=(val)
     u = val.sub(%r{^https?\:\/\/?}, '')
            .sub(%r{^www?\.\/?}, '')
     super(u.split('/').first)
+  end
+
+  def rss_url=(val)
+    super(Feed::DiscoverService.rss_url(val))
   end
 
   private
@@ -24,14 +32,13 @@ class Feed < ApplicationRecord
   end
 
   def site_should_include_rss
-    return if Feedbag.find(url).any?
+    return if rss_url.present? && Feed::DiscoverService.valid?(rss_url)
 
-    errors.add(:url, 'invalid url, site must include rss or atom page')
+    errors.add(:rss_url, 'invalid url, site must include rss or atom page')
   end
 
   def set_info
     self.name = page.meta['og:site_name']
-    self.rss_url = Feedbag.find(url).first
     self.title = page.best_title
     self.description = page.best_description
   end
