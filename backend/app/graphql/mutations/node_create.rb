@@ -7,8 +7,8 @@ class Mutations::NodeCreate < Mutations::BaseMutation
   argument :attributes, Types::Inputs::NodeCreateAttributes, required: true
 
   def resolve(attributes:)
-    user = User.first
-    node = user.nodes.build(attributes.to_h)
+    current_user = context[:current_user]
+    node = current_user.nodes.build(attributes.to_h)
 
     if node.save
       { node: node }

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Feed < ApplicationRecord
+  searchkick word_start: [:name]
+
   validate :site_should_include_rss
   validates :name, :url, presence: true
   validates :url, :rss_url, uniqueness: true

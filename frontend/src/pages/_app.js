@@ -5,6 +5,7 @@ import withApollo from '../lib/withApollo' // eslint-disable-line
 
 import 'normalize.css/normalize.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
+import '@blueprintjs/select/lib/css/blueprint-select.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 
 class MyApp extends App {

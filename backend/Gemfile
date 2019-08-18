@@ -22,6 +22,9 @@ gem 'feedbag'
 gem 'feedjira'
 gem 'jwt'
 gem 'metainspector'
+gem 'oj'
+gem 'searchkick'
+gem 'typhoeus'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

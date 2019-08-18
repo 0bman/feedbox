@@ -1,5 +1,6 @@
 import { Button, Icon, Intent } from '@blueprintjs/core'
 import { useState } from 'react'
+import Link from 'next/link'
 
 import AddFeedModal from './AddFeedModal'
 
@@ -31,9 +32,14 @@ const Node = () => {
               You can follow publications, blogs, keyword alerts, and twitter
               feeds
             </p>
-            <Button className='node_page__btn_discover' intent={Intent.PRIMARY}>
-              <Icon className='node_page__btn_icon' icon='globe' /> Discover
-            </Button>
+            <Link href='/discover'>
+              <Button
+                className='node_page__btn_discover'
+                intent={Intent.PRIMARY}
+              >
+                <Icon className='node_page__btn_icon' icon='globe' /> Discovery
+              </Button>
+            </Link>
             <Button intent={Intent.SUCCESS} onClick={handleToggleModal}>
               <Icon className='node_page__btn_icon' icon='small-plus' /> Add
               Content

@@ -50,7 +50,7 @@ const Tree = ({
       const elementPath = currentPath.concat(i)
       const href = `${baseUrl}/[${param}]`
       const as = `${baseUrl}/${node[param]}`
-      const isSelected = router.query[param] === node[param]
+      const isSelected = router.asPath === `/nodes/${node[param]}`
 
       return (
         <TypedTreeNode

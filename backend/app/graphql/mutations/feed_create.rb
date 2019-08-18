@@ -7,7 +7,8 @@ class Mutations::FeedCreate < Mutations::BaseMutation
   argument :attributes, Types::Inputs::FeedCreateAttributes, required: true
 
   def resolve(attributes:)
-    feed = Feed.new(url: attributes[:url])
+    url = attributes[:url]
+    feed = Feed.new(url: url, rss_url: url)
     feed.set_info_from_url!
 
     if feed.save

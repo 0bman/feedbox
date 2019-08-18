@@ -12,11 +12,7 @@ import { ALL_NODES, CREATE_NODE, UPDATE_NODE } from './queries'
 
 const Menu = () => {
   const [isDrawerOpen, setToggleDrawer] = useState(false)
-  const [nodes, setNodes] = useState([])
-
-  useQuery(ALL_NODES, {
-    onCompleted: ({ nodes }) => setNodes(nodes)
-  })
+  const { data } = useQuery(ALL_NODES)
 
   const [createNode] = useMutation(CREATE_NODE, {
     update(
@@ -74,7 +70,7 @@ const Menu = () => {
           {...{
             onNodeCollapse,
             onNodeExpand,
-            contents: nodes,
+            contents: (data && data.nodes) || [],
             baseUrl: '/nodes',
             param: 'id',
             className:

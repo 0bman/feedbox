@@ -7,8 +7,8 @@ class Mutations::NodeUpdate < Mutations::BaseMutation
   argument :attributes, Types::Inputs::NodeUpdateAttributes, required: true
 
   def resolve(attributes:)
-    user = User.first
-    node = user.nodes.find(attributes.to_h[:id])
+    current_user = context[:current_user]
+    node = current_user.nodes.find(attributes.to_h[:id])
 
     if node.update(attributes.to_h)
       { node: node }
