@@ -71,7 +71,8 @@ const Menu = () => {
             onNodeCollapse,
             onNodeExpand,
             contents: (data && data.nodes) || [],
-            baseUrl: '/nodes',
+            baseNodeUrl: '/nodes',
+            baseFeedUrl: '/feeds',
             param: 'id',
             className:
               'tree__node tree__node_hover_cursor_pointer tree__node_hover'

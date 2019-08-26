@@ -1,8 +1,4 @@
-import {
-  InputGroup,
-  MenuItem,
-  Classes
-} from '@blueprintjs/core'
+import { InputGroup, MenuItem, Classes } from '@blueprintjs/core'
 import classNames from 'classnames'
 import { QueryList } from '@blueprintjs/select'
 import { useState } from 'react'

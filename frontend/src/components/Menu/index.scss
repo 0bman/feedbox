@@ -1,10 +1,11 @@
 .menu {
+  border-right: 1px solid #dee2e6;
   grid-column: 1;
   grid-row: 1 / 4;
 }
 
 .menu_background_gray {
-  background-color: #f5f5f5;
+  background-color: #fff;
 }
 
 .tree_size_sm {
@@ -54,7 +55,7 @@
 
 .tree__node_hover {
   .bp3-tree-node.bp3-tree-node-selected > .bp3-tree-node-content {
-    background-color: rgb(235, 235, 235);
+    background-color: #e9ecef;
     color: inherit;
     font-weight: bold;
 
@@ -70,7 +71,7 @@
   .bp3-tree-node {
     .bp3-tree-node-content {
       &:hover {
-        background-color: rgb(235, 235, 235);
+        background-color: #e9ecef;
       }
     }
 

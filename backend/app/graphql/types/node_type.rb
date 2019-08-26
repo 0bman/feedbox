@@ -9,5 +9,10 @@ module Types
     field :is_expanded, Boolean, null: false
     field :icon, String, null: true
     field :disabled, Boolean, null: false
+    field :child_nodes, [FeedType], null: false, resolver_method: :feeds
+
+    def feeds
+      object.feeds
+    end
   end
 end

@@ -15,7 +15,6 @@ class CreateFeeds < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :feeds, :url, unique: true
     add_index :feeds, :rss_url, unique: true
   end
 end

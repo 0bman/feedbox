@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Classes, Utils, Collapse, Icon } from '@blueprintjs/core'
 import Link from 'next/link'
+import Img from 'react-image'
 
 const TypedTreeNode = (props) => {
   const {
@@ -86,7 +87,12 @@ const TypedTreeNode = (props) => {
       <Link as={as} href={href}>
         <a className={contentClasses} {...eventHandlers()}>
           {maybeRenderCaret()}
-          <Icon className={Classes.TREE_NODE_ICON} icon={icon} />
+          {icon && (
+            <Img
+              className={classNames(Classes.TREE_NODE_ICON, 'favicon')}
+              src={icon}
+            />
+          )}
           <span className={Classes.TREE_NODE_LABEL}>{label}</span>
           {maybeRenderSecondaryLabel()}
         </a>

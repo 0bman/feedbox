@@ -10,6 +10,7 @@ AllCops:
     - 'cache/**/*'
     - '.bundle/**/*'
     - 'db/*'
+    - 'db/seeds/*'
     - 'bin/*'
     - 'log/**/*'
 

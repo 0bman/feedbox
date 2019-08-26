@@ -2,6 +2,7 @@ import { Button, Icon, Intent } from '@blueprintjs/core'
 import { useState } from 'react'
 import Link from 'next/link'
 
+import Col from '../shared/Col'
 import AddFeedModal from './AddFeedModal'
 
 import './index.scss'
@@ -23,7 +24,7 @@ const Node = () => {
         <div className='col' />
       </div>
       <div className='row'>
-        <div className='col node_page__empty_state' style={{ '--col': 6 }}>
+        <Col className='node_page__empty_state' md='6'>
           <div className='bp3-running-text text-center'>
             <h4 className='bp3-heading'>
               Which sources would you like to follow?
@@ -45,7 +46,7 @@ const Node = () => {
               Content
             </Button>
           </div>
-        </div>
+        </Col>
       </div>
     </div>
   )

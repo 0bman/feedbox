@@ -13,10 +13,27 @@ class Feed::DiscoverService
     new(url).rss_url
   end
 
-  def initialize(url, finder = Feedbag, parser = Feedjira)
+  def self.fetch(feed)
+    new(feed.rss_url, Feedbag, Feedjira, feed).fetch
+  end
+
+  def initialize(url, finder = Feedbag, parser = Feedjira, feed = nil)
     @url = url
     @finder = finder
     @parser = parser
+    @feed = feed
+  end
+
+  def fetch
+    return unless @feed
+
+    update(@feed)
+
+    entries = parse.entries.uniq(&:url).map do |entry|
+      @feed.entries.build(entry.to_h)
+    end
+
+    Entry.import(entries, validate_uniqueness: true)
   end
 
   def parse
@@ -43,6 +60,16 @@ class Feed::DiscoverService
   end
 
   private
+
+  def update(feed)
+    cols = %i[title description]
+    cols.each do |col|
+      val = parse.send(col)
+      feed[col] = val if val.present?
+    end
+
+    feed.save if feed.changed?
+  end
 
   def get_feed_for_url(url, parser)
     if Feedbag.feed?(url)

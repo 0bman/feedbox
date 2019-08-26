@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_141118) do
+ActiveRecord::Schema.define(version: 2019_08_18_173021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "feed_id", null: false
+    t.string "author"
+    t.string "title"
+    t.text "summary"
+    t.text "content"
+    t.string "image"
+    t.datetime "published"
+    t.string "url"
+    t.string "link"
+    t.string "entry_id"
+    t.string "language"
+    t.json "categories"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_entries_on_entry_id", unique: true
+    t.index ["feed_id"], name: "index_entries_on_feed_id"
+    t.index ["link"], name: "index_entries_on_link", unique: true
+    t.index ["url"], name: "index_entries_on_url", unique: true
+  end
 
   create_table "feeds", force: :cascade do |t|
     t.string "name", null: false
@@ -27,7 +48,18 @@ ActiveRecord::Schema.define(version: 2019_08_13_141118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rss_url"], name: "index_feeds_on_rss_url", unique: true
-    t.index ["url"], name: "index_feeds_on_url", unique: true
+  end
+
+  create_table "node_feeds", force: :cascade do |t|
+    t.bigint "node_id", null: false
+    t.bigint "feed_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_node_feeds_on_feed_id"
+    t.index ["node_id", "feed_id", "user_id"], name: "index_node_feeds_on_node_id_and_feed_id_and_user_id", unique: true
+    t.index ["node_id"], name: "index_node_feeds_on_node_id"
+    t.index ["user_id"], name: "index_node_feeds_on_user_id"
   end
 
   create_table "nodes", force: :cascade do |t|

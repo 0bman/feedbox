@@ -10,6 +10,12 @@ const ALL_NODES = gql`
       isExpanded
       icon
       disabled
+
+      childNodes {
+        id
+        label
+        icon
+      }
     }
   }
 `

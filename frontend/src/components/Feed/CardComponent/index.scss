@@ -1,0 +1,17 @@
+.bp3-card.card {
+  padding: 0;
+  margin: 23px;
+  display: table;
+  background-color: #fff;
+  background-clip: border-box;
+  border-color: #dee2e6;
+  width: 240px;
+  min-height: 297px;
+}
+
+.card__img {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 144px;
+  width: 100%;
+}

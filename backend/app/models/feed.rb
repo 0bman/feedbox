@@ -5,7 +5,11 @@ class Feed < ApplicationRecord
 
   validate :site_should_include_rss
   validates :name, :url, presence: true
-  validates :url, :rss_url, uniqueness: true
+  validates :rss_url, uniqueness: true
+
+  has_many :node_feeds
+  has_many :nodes, through: :node_feeds
+  has_many :entries
 
   def set_info_from_url!
     set_info
@@ -27,10 +31,23 @@ class Feed < ApplicationRecord
     super(Feed::DiscoverService.rss_url(val))
   end
 
+  def icon
+    favicon
+  end
+
+  def label
+    name
+  end
+
   private
 
   def page
-    @page ||= MetaInspector.new('https://' + url)
+    @page ||= MetaInspector.new(
+      url,
+      connection_timeout: 10,
+      read_timeout: 5,
+      retries: 2
+    )
   end
 
   def site_should_include_rss

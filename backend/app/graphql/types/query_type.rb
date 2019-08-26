@@ -11,21 +11,20 @@ module Types
     end
 
     field :nodes, [NodeType], null: false, extras: [:lookahead] do
-      description 'Get all nodes'
+      description 'Get all nodes with feeds'
     end
 
     def nodes(lookahead:)
       Node.select(columns(lookahead)).order(:created_at)
     end
 
-    field :node, NodeType, null: true do
+    field :node, NodeType, null: false do
       description 'Get node by id'
 
       argument :id, ID, required: true
     end
 
     def node(id:)
-      current_user = context[:current_user]
       current_user.nodes.find(id)
     end
 
@@ -39,12 +38,57 @@ module Types
       Feed.search(query, fields: [:name], match: :word_start, limit: 20)
     end
 
+    field :feeds_by_node, NodeFeedType, null: false, extras: [:lookahead] do
+      description 'Get feeds by particular node'
+
+      argument :node_id, ID, required: true
+    end
+
+    def feeds_by_node(node_id:, lookahead:)
+      select = columns(lookahead)
+      node = current_user.nodes.select(select[:node]).find(node_id)
+      { node: node, feeds: node.feeds.select(select[:feeds]) }
+    end
+
+    field :feed, FeedType, null: false, extras: [:lookahead] do
+      description 'Get feed by id'
+
+      argument :id, ID, required: true
+    end
+
+    def feed(id:, lookahead:)
+      Feed.select(columns(lookahead)).find(id)
+    end
+
+    field :entries, [EntryType], null: false, extras: [:lookahead] do
+      description 'Get news by feed id'
+
+      argument :id, ID, required: true
+    end
+
+    def entries(id:, lookahead:)
+      Entry.select(columns(lookahead)).where(feed_id: id)
+    end
+
     private
 
     def columns(lookahead)
-      columns = lookahead.selections.map(&:name)
-      columns.delete(:__typename)
-      columns
+      selections = {}
+      cols = []
+      lookahead.selections.each do |obj|
+        if obj.selections.any?
+          selections[obj.name] = columns(obj)
+        else
+          cols << obj.name
+        end
+      end
+
+      cols.delete(:__typename)
+      cols.presence || selections
+    end
+
+    def current_user
+      context[:current_user]
     end
   end
 end

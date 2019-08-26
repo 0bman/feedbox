@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Classes, Utils } from '@blueprintjs/core'
 import { useRouter } from 'next/router'
+import shortid from 'shortid'
 import TypedTreeNode from './TypedTreeNode'
 
 const Tree = ({
@@ -13,7 +14,8 @@ const Tree = ({
   onNodeExpand,
   contents,
   className,
-  baseUrl,
+  baseNodeUrl,
+  baseFeedUrl,
   param
 }) => {
   const router = useRouter()
@@ -47,15 +49,25 @@ const Tree = ({
     if (treeNodes == null) return null
 
     const nodeItems = treeNodes.map((node, i) => {
+      let isSelected
+      let href
+      let as
       const elementPath = currentPath.concat(i)
-      const href = `${baseUrl}/[${param}]`
-      const as = `${baseUrl}/${node[param]}`
-      const isSelected = router.asPath === `/nodes/${node[param]}`
+
+      if (node.__typename === 'Feed') {
+        href = `${baseFeedUrl}/[${param}]`
+        as = `${baseFeedUrl}/${node[param]}`
+        isSelected = router.asPath === `${baseFeedUrl}/${node[param]}`
+      } else if (node.__typename === 'Node') {
+        href = `${baseNodeUrl}/[${param}]`
+        as = `${baseNodeUrl}/${node[param]}`
+        isSelected = router.asPath === `${baseNodeUrl}/${node[param]}`
+      }
 
       return (
         <TypedTreeNode
           {...node}
-          key={node.id}
+          key={shortid.generate()}
           as={as}
           depth={elementPath.length - 1}
           href={href}
@@ -89,7 +101,8 @@ Tree.propTypes = {
   onNodeCollapse: PropTypes.func,
   onNodeExpand: PropTypes.func,
   className: PropTypes.string,
-  baseUrl: PropTypes.string,
+  baseNodeUrl: PropTypes.string,
+  baseFeedUrl: PropTypes.string,
   param: PropTypes.string,
   contents: PropTypes.array
 }
