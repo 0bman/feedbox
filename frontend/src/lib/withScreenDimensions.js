@@ -19,9 +19,7 @@ export default function withScreenDimensions(WrappedComponent) {
       }
     }, [])
 
-    return (
-      <WrappedComponent {...props} dimensions={{ width, height }} />
-    )
+    return <WrappedComponent {...props} dimensions={{ width, height }} />
   }
 
   return Screen

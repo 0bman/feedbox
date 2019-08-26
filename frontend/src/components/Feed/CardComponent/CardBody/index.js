@@ -20,7 +20,7 @@ const CardBody = ({ entry, isEmptyImg }) => {
 
   return (
     <div className={classNames('card__body', {
-      card__body_min_height_106: !isEmptyImg,
+      card__body_min_height_115: !isEmptyImg,
       card__body_min_height_255: isEmptyImg
     })}
     >

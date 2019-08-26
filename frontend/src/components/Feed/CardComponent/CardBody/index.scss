@@ -13,8 +13,8 @@
   min-height: 255px;
 }
 
-.card__body_min_height_106 {
-  min-height: 106px;
+.card__body_min_height_115 {
+  min-height: 115px;
 }
 
 .card__body__title {
@@ -29,7 +29,7 @@
 
 .card__body__title_ellipsis {
   @include multiLineEllipsis(
-    $lineHeight: 1.2em,
+    $lineHeight: 1.4em,
     $lineCount: 3,
     $bgColor: white
   );
@@ -45,7 +45,7 @@
 
 .card__body__summary_ellipsis {
   @include multiLineEllipsis(
-    $lineHeight: 1.15em,
+    $lineHeight: 1.6em,
     $lineCount: 5,
     $bgColor: white
   );

@@ -36,7 +36,7 @@ const CardComponent = ({ entry }) => {
     <Card key={shortid.generate()} className='card' interactive>
       {cap}
       <CardBody {...{ entry, isEmptyImg }} />
-      <CardFooter />
+      <CardFooter url={entry.url} />
     </Card>
   )
 }

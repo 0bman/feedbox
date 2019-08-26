@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types'
 import {
-  Icon, Menu, MenuItem, MenuDivider, Popover, Position
+  Icon, Menu, MenuItem, MenuDivider, Popover, Position, AnchorButton
 } from '@blueprintjs/core'
 
 import './index.scss'
 
-const CardFooter = () => {
+const CardFooter = ({ url }) => {
   const menu = (
     <Menu>
       <MenuItem icon='graph' text='Graph' />
@@ -22,13 +23,21 @@ const CardFooter = () => {
   return (
     <div className='card__footer'>
       <div>
-        <Icon icon='share' />
+        <AnchorButton href={url} minimal small target='_blank'>
+          <Icon icon='share' iconSize={14} />
+        </AnchorButton>
         <Popover content={menu} position={Position.BOTTOM}>
-          <Icon icon='more' />
+          <AnchorButton minimal small>
+            <Icon icon='more' iconSize={14} />
+          </AnchorButton>
         </Popover>
       </div>
     </div>
   )
+}
+
+CardFooter.propTypes = {
+  url: PropTypes.string.isRequired
 }
 
 export default CardFooter
