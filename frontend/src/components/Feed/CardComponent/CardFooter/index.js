@@ -20,10 +20,16 @@ const CardFooter = ({ url }) => {
     </Menu>
   )
 
+  const onClickShare = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    window.open(url)
+  }
+
   return (
     <div className='card__footer'>
       <div>
-        <AnchorButton href={url} minimal small target='_blank'>
+        <AnchorButton minimal onClick={onClickShare} small>
           <Icon icon='share' iconSize={14} />
         </AnchorButton>
         <Popover content={menu} position={Position.BOTTOM}>

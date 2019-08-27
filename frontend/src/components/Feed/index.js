@@ -10,6 +10,7 @@ import shortid from 'shortid'
 import clamp from 'lodash.clamp'
 
 import CardComponent from './CardComponent'
+import DrawerModal from './DrawerModal'
 
 const GET_ENTRIES = gql`
   query getEntries($id: ID!) {
@@ -22,13 +23,20 @@ const GET_ENTRIES = gql`
       url
       published
       categories
+      feed {
+        name
+        url
+        scheme
+      }
     }
   }
 `
 
 const Feed = ({ width, height }) => {
   const router = useRouter()
+  const [isDrawerOpen, toggleDrawer] = useState(false)
   const [rowColNumber, setColNumber] = useState(3)
+  const [entry, setEntry] = useState(null)
   const defaultRowHeight = 358
   const bottomGutter = 50
   const leftGutter = 50
@@ -50,8 +58,17 @@ const Feed = ({ width, height }) => {
 
   const lists = chunk(data.entries, rowColNumber)
 
+  const handleToggleDrawer = (entry) => {
+    toggleDrawer(!isDrawerOpen)
+    setEntry(entry)
+  }
+
   const renderCell = (entry) => (
-    <CardComponent key={shortid.generate()} entry={entry} />
+    <CardComponent
+      key={shortid.generate()}
+      entry={entry}
+      handleToggleDrawer={handleToggleDrawer}
+    />
   )
 
   // eslint-disable-next-line
@@ -62,14 +79,21 @@ const Feed = ({ width, height }) => {
   )
 
   return (
-    <List
-      height={height - bottomGutter}
-      itemCount={lists.length}
-      itemSize={defaultRowHeight}
-      width={listWidth}
-    >
-      {row}
-    </List>
+    <>
+      <DrawerModal
+        entry={entry}
+        handleToggleDrawer={handleToggleDrawer}
+        isDrawerOpen={isDrawerOpen}
+      />
+      <List
+        height={height - bottomGutter}
+        itemCount={lists.length}
+        itemSize={defaultRowHeight}
+        width={listWidth}
+      >
+        {row}
+      </List>
+    </>
   )
 }
 

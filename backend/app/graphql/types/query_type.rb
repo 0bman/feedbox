@@ -67,7 +67,9 @@ module Types
     end
 
     def entries(id:, lookahead:)
-      Entry.select(columns(lookahead)).where(feed_id: id)
+      Entry.includes(:feed)
+           .select(columns(lookahead).push(:feed_id))
+           .where(feed_id: id)
     end
 
     private

@@ -11,5 +11,6 @@ module Types
     field :published, GraphQL::Types::ISO8601DateTime, null: true
     field :url, String, null: false
     field :categories, [String], null: true
+    field :feed, FeedType, null: false
   end
 end

@@ -11,7 +11,7 @@ import './index.scss'
 import { ALL_NODES, CREATE_NODE, UPDATE_NODE } from './queries'
 
 const Menu = () => {
-  const [isDrawerOpen, setToggleDrawer] = useState(false)
+  const [isDrawerOpen, toggleDrawer] = useState(false)
   const { data } = useQuery(ALL_NODES)
 
   const [createNode] = useMutation(CREATE_NODE, {
@@ -39,7 +39,7 @@ const Menu = () => {
   const [updateNode] = useMutation(UPDATE_NODE)
 
   const handleToggleDrawer = () => {
-    setToggleDrawer(!isDrawerOpen)
+    toggleDrawer(!isDrawerOpen)
   }
 
   const onNodeCollapse = (nodeData) => {

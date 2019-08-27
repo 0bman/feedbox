@@ -33,8 +33,7 @@ const CardBody = ({ entry, isEmptyImg }) => {
       <p className='card__body__published_ellipis'>
         {renderAuthor}
         <small title={`Published: ${published}`}>
-          {entry.published && publishedAt}
-          {unit[0]}
+          {entry.published && publishedAt + unit[0]}
         </small>
       </p>
       {isSummary && (
