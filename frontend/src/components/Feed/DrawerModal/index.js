@@ -1,9 +1,5 @@
 import PropTypes from 'prop-types'
-import {
-  Drawer,
-  Spinner,
-  AnchorButton
-} from '@blueprintjs/core'
+import { Drawer, Spinner, AnchorButton } from '@blueprintjs/core'
 import convert from 'htmr'
 import dayjs from 'dayjs'
 import Img from 'react-image'
