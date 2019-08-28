@@ -44,7 +44,7 @@ const DrawerModal = ({ isDrawerOpen, handleToggleDrawer, createNode }) => {
       isCloseButtonShown
       isOpen={isDrawerOpen}
       onClose={onClose}
-      size='70%'
+      size='75%'
       title=''
     >
       <section className='drawer'>

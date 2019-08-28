@@ -16,9 +16,17 @@
   width: 144px;
 }
 
+.feed_drawer_modal__img_max_width {
+  max-width: 654px;
+}
+
 .feed_drawer_modal__body {
   margin: 0 auto;
   max-width: 654px;
+}
+
+.feed_drawer_modal__body_margin_bottom {
+  margin-bottom: 6rem;
 }
 
 .feed_drawer_modal__feed_name {
@@ -73,4 +81,12 @@
   margin-top: 1.5rem;
   font-size: 1rem;
   line-height: 1.75rem;
+}
+
+.feed_drawer_modal__row {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: inherit;
+  font-size: inherit;
+  color: inherit;
 }

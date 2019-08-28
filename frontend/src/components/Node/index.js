@@ -1,51 +1,49 @@
-import { Button, Intent, NonIdealState } from '@blueprintjs/core'
-import { useState } from 'react'
-import Link from 'next/link'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
+import { useRouter } from 'next/router'
+import get from 'lodash/get'
+import isEmpty from 'lodash.isempty'
 
-import AddFeedModal from './AddFeedModal'
+import NonIdealComponent from './NonIdealComponent'
+import NewsCard from '../Shared/NewsCard'
 
-import './index.scss'
+const GET_FEED_LISTS = gql`
+  query feedLists($nodeId: ID!) {
+    feedsByNode(nodeId: $nodeId) {
+      id
+      author
+      image
+      title
+      summary
+      content
+      url
+      published
+      categories
+      feed {
+        name
+        url
+        scheme
+      }
+    }
+  }
+`
 
 const Node = () => {
-  const [isOpenModal, toggleOpenModal] = useState(false)
+  const router = useRouter()
+  const nodeId = get(router, ['query', 'id'])
+  const { data, loading } = useQuery(GET_FEED_LISTS, { variables: { nodeId } })
 
-  const handleToggleModal = () => {
-    toggleOpenModal(!isOpenModal)
+  if (loading) return <span>Loading...</span>
+
+  const renderCards = () => {
+    if (isEmpty(data.feedsByNode)) {
+      return <NonIdealComponent />
+    }
+
+    return <NewsCard entries={data.feedsByNode} isRenderFeedName />
   }
 
-  const action = (
-    <div>
-      <Link href='/discover'>
-        <Button
-          className='node_page__btn_discover upcase'
-          intent={Intent.PRIMARY}
-        >
-          Add Content
-        </Button>
-      </Link>
-      <Button
-        className='upcase'
-        intent={Intent.SUCCESS}
-        onClick={handleToggleModal}
-      >
-        Add Feed
-      </Button>
-    </div>
-  )
-  const description = `You can follow publications, blogs, keyword alerts,
-                       and twitter feeds`
-
-  return (
-    <div className='container node_page_non_ideal'>
-      <AddFeedModal {...{ isOpenModal, handleToggleModal }} />
-      <NonIdealState
-        action={action}
-        description={description}
-        icon='search'
-        title='Which sources would you like to follow?'
-      />
-    </div>
-  )
+  return renderCards()
 }
 
 export default Node

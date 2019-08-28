@@ -6,7 +6,7 @@ import convert from 'htmr'
 
 import './index.scss'
 
-const CardBody = ({ entry, isEmptyImg }) => {
+const CardBody = ({ entry, isEmptyImg, isRenderFeedName }) => {
   const currentDate = dayjs()
   const published = dayjs(entry.published)
   const isSame = currentDate.isSame(published, 'day')
@@ -17,11 +17,13 @@ const CardBody = ({ entry, isEmptyImg }) => {
   const isSummary = isEmptyImg && !isEmpty(entry.summary)
   const renderAuthor = !isEmpty(entry.author) &&
     <small title={entry.author}>by {entry.author} {' / '}</small>
+  const renderSiteName = isRenderFeedName &&
+    <small title={entry.feed.name}>{entry.feed.name} {' '}</small>
 
   return (
     <div className={classNames('card__body', {
       card__body_min_height_115: !isEmptyImg,
-      card__body_min_height_255: isEmptyImg
+      card__body_min_height_263: isEmptyImg
     })}
     >
       <h6
@@ -31,6 +33,7 @@ const CardBody = ({ entry, isEmptyImg }) => {
         {entry.title}
       </h6>
       <p className='card__body__published_ellipis'>
+        {renderSiteName}
         {renderAuthor}
         <small title={`Published: ${published}`}>
           {entry.published && publishedAt + unit[0]}
@@ -50,6 +53,7 @@ const CardBody = ({ entry, isEmptyImg }) => {
 
 CardBody.propTypes = {
   entry: PropTypes.object.isRequired,
+  isRenderFeedName: PropTypes.bool,
   isEmptyImg: PropTypes.bool.isRequired
 }
 

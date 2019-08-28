@@ -38,16 +38,18 @@ module Types
       Feed.search(query, fields: [:name], match: :word_start, limit: 20)
     end
 
-    field :feeds_by_node, NodeFeedType, null: false, extras: [:lookahead] do
-      description 'Get feeds by particular node'
+    field :feeds_by_node, [EntryType], null: false, extras: [:lookahead] do
+      description 'Get news by particular node'
 
       argument :node_id, ID, required: true
     end
 
     def feeds_by_node(node_id:, lookahead:)
-      select = columns(lookahead)
-      node = current_user.nodes.select(select[:node]).find(node_id)
-      { node: node, feeds: node.feeds.select(select[:feeds]) }
+      node = current_user.nodes.find(node_id)
+      node.entries
+          .includes(:feed)
+          .select(columns(lookahead).push(:feed_id))
+          .order(published: :desc)
     end
 
     field :feed, FeedType, null: false, extras: [:lookahead] do
@@ -70,6 +72,7 @@ module Types
       Entry.includes(:feed)
            .select(columns(lookahead).push(:feed_id))
            .where(feed_id: id)
+           .order(published: :desc)
     end
 
     private

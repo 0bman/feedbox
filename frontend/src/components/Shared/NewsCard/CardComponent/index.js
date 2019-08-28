@@ -10,7 +10,7 @@ import CardFooter from './CardFooter'
 
 import './index.scss'
 
-const CardComponent = ({ entry, handleToggleDrawer }) => {
+const CardComponent = ({ entry, handleToggleDrawer, isRenderFeedName }) => {
   const renderImg = (src) => (
     <Img
       className='card__img'
@@ -40,13 +40,14 @@ const CardComponent = ({ entry, handleToggleDrawer }) => {
       onClick={() => handleToggleDrawer(entry)}
     >
       {cap}
-      <CardBody {...{ entry, isEmptyImg }} />
+      <CardBody {...{ entry, isEmptyImg, isRenderFeedName }} />
       <CardFooter url={entry.url} />
     </Card>
   )
 }
 
 CardComponent.propTypes = {
+  isRenderFeedName: PropTypes.bool,
   entry: PropTypes.object.isRequired,
   handleToggleDrawer: PropTypes.func.isRequired
 }
