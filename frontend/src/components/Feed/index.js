@@ -37,7 +37,7 @@ const Feed = ({ width, height }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false)
   const [rowColNumber, setColNumber] = useState(3)
   const [entry, setEntry] = useState(null)
-  const defaultRowHeight = 358
+  const defaultRowHeight = 360
   const bottomGutter = 50
   const leftGutter = 50
   const listMaxWidth = 870

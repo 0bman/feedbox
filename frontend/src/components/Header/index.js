@@ -1,4 +1,4 @@
-import { Navbar, NavbarGroup, NavbarHeading } from '@blueprintjs/core'
+import { Navbar } from '@blueprintjs/core'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
@@ -8,6 +8,7 @@ import includes from 'lodash.includes'
 import classNames from 'classnames'
 import get from 'lodash/get'
 
+import Actions from './Actions'
 import './index.scss'
 
 const GET_FEED = gql`
@@ -51,15 +52,15 @@ const Header = () => {
     if (!isIncludesType) return null
 
     return (
-      <NavbarHeading className={classNames({ 'bp3-skeleton': loading })}>
-        {name()}
-      </NavbarHeading>
+      <span className={classNames({ 'bp3-skeleton': loading })}>{name()}</span>
     )
   }
 
   return (
     <Navbar className='header'>
-      <NavbarGroup>{renderName()}</NavbarGroup>
+      <div className='container'>
+        {isIncludesType && <Actions name={renderName()} />}
+      </div>
     </Navbar>
   )
 }

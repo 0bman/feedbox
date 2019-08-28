@@ -20,7 +20,7 @@ const Menu = () => {
           <Icon icon='star' />
         </AnchorButton>
         <AnchorButton minimal title='Copy link to clipboard'>
-          <Icon icon='paperclip' />
+          <Icon icon='link' />
         </AnchorButton>
       </NavbarGroup>
     </Navbar>

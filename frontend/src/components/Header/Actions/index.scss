@@ -1,0 +1,15 @@
+.header__actions {
+  margin: 0 20px;
+}
+
+.header__user_actions__btn_margin_left_20 {
+  margin-left: 20px;
+}
+
+.header__breadcrumbs {
+  a {
+    &:hover {
+      color: #757575;
+    }
+  }
+}
