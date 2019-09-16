@@ -6,8 +6,8 @@ import get from 'lodash/get'
 import NewsCard from '../Shared/NewsCard'
 
 const GET_ENTRIES = gql`
-  query getEntries($id: ID!) {
-    entries(id: $id) {
+  query getEntries($feedId: ID!) {
+    entries(feedId: $feedId) {
       id
       author
       image
@@ -28,8 +28,8 @@ const GET_ENTRIES = gql`
 
 const Feed = () => {
   const router = useRouter()
-  const id = get(router, ['query', 'id'])
-  const { data, loading } = useQuery(GET_ENTRIES, { variables: { id } })
+  const feedId = get(router, ['query', 'id'])
+  const { data, loading } = useQuery(GET_ENTRIES, { variables: { feedId } })
 
   if (loading) return <span>Loading...</span>
 

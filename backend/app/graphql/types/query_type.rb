@@ -2,14 +2,6 @@
 
 module Types
   class QueryType < Types::BaseObject
-    field :users, [UserType], null: false, extras: [:lookahead] do
-      description 'Get all users'
-    end
-
-    def users(lookahead:)
-      User.select(columns(lookahead))
-    end
-
     field :nodes, [NodeType], null: false, extras: [:lookahead] do
       description 'Get all nodes with feeds'
     end
@@ -65,14 +57,26 @@ module Types
     field :entries, [EntryType], null: false, extras: [:lookahead] do
       description 'Get news by feed id'
 
-      argument :id, ID, required: true
+      argument :feed_id, ID, required: true
     end
 
-    def entries(id:, lookahead:)
+    def entries(feed_id:, lookahead:)
       Entry.includes(:feed)
            .select(columns(lookahead).push(:feed_id))
-           .where(feed_id: id)
+           .where(feed_id: feed_id)
            .order(published: :desc)
+    end
+
+    field :all_entries, [EntryType], null: false, extras: [:lookahead] do
+      description 'Get all entries'
+    end
+
+    def all_entries(lookahead:)
+      Entry
+        .includes(:feed)
+        .where(id: current_user.entry_ids)
+        .order(published: :desc)
+        .select(columns(lookahead).push(:feed_id))
     end
 
     private

@@ -2,7 +2,11 @@ import Link from 'next/link'
 
 const Tabs = () => (
   <ul>
-    <li>Today</li>
+    <li>
+      <Link href='/'>
+        <a>Today</a>
+      </Link>
+    </li>
     <li>Bookmarks</li>
     <li>
       <Link href='/discover'>

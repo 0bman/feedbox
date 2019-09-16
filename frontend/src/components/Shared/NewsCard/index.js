@@ -46,9 +46,7 @@ const NewsCard = ({ entries, dimensions, isRenderFeedName }) => {
 
   // eslint-disable-next-line
   const row = ({ index, style }) => (
-    <div style={{ ...style, display: 'flex' }}>
-      {lists[index].map(renderCell)}
-    </div>
+    <div style={{ ...style }}>{lists[index].map(renderCell)}</div>
   )
 
   return (

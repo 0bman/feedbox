@@ -11,4 +11,6 @@ class User < ApplicationRecord
   }
 
   has_many :nodes
+  has_many :feeds, through: :nodes
+  has_many :entries, through: :feeds
 end

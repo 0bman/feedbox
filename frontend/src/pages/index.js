@@ -1,8 +1,11 @@
 import Layout from '../components/Layout'
+import Home from '../components/Home'
 
 const Index = () => (
-  <Layout>
-    <h1>Home</h1>
+  <Layout className='scroll_off'>
+    <div className='container'>
+      <Home />
+    </div>
   </Layout>
 )
 

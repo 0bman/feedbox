@@ -35,7 +35,7 @@ const CardComponent = ({ entry, handleToggleDrawer, isRenderFeedName }) => {
   return (
     <Card
       key={shortid.generate()}
-      className='card'
+      className='card card_grid card_pull_left'
       interactive
       onClick={() => handleToggleDrawer(entry)}
     >

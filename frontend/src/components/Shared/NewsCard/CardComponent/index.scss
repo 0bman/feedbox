@@ -1,12 +1,19 @@
 .bp3-card.card {
   padding: 0;
   margin: 24px;
-  display: table;
   background-color: #fff;
   background-clip: border-box;
   border-color: #dee2e6;
   width: 240px;
-  min-height: 297px;
+  min-height: 312px;
+}
+
+.bp3-card.card_grid {
+  display: grid;
+}
+
+.bp3-card.card_pull_left {
+  float: left;
 }
 
 .card__img {
