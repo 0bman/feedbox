@@ -17,6 +17,7 @@ const GET_ENTRIES = gql`
       url
       published
       categories
+      bookmarked
       feed {
         name
         url

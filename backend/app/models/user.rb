@@ -13,4 +13,9 @@ class User < ApplicationRecord
   has_many :nodes
   has_many :feeds, through: :nodes
   has_many :entries, through: :feeds
+  has_many :bookmarks
+
+  def bookmarked?(entry_id)
+    bookmarks.any? { |b| b.entry_id == entry_id }
+  end
 end

@@ -41,7 +41,7 @@ const CardComponent = ({ entry, handleToggleDrawer, isRenderFeedName }) => {
     >
       {cap}
       <CardBody {...{ entry, isEmptyImg, isRenderFeedName }} />
-      <CardFooter url={entry.url} />
+      <CardFooter entry={entry} url={entry.url} />
     </Card>
   )
 }

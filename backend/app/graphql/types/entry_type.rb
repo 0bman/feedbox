@@ -12,5 +12,16 @@ module Types
     field :url, String, null: false
     field :categories, [String], null: true
     field :feed, FeedType, null: false
+    field :bookmarked, Boolean, null: false, resolver_method: :bookmarked?
+
+    def bookmarked?
+      current_user.bookmarked?(object.id)
+    end
+
+    private
+
+    def current_user
+      context[:current_user]
+    end
   end
 end

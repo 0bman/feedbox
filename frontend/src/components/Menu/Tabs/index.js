@@ -7,7 +7,11 @@ const Tabs = () => (
         <a>Today</a>
       </Link>
     </li>
-    <li>Bookmarks</li>
+    <li>
+      <Link href='/stars'>
+        <a>Stars</a>
+      </Link>
+    </li>
     <li>
       <Link href='/discover'>
         <a>Discovery</a>

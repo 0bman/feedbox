@@ -30,31 +30,10 @@ const GET_NODE = gql`
   }
 `
 
-const ALL_ENTRIES = gql`
-  query {
-    allEntries {
-      id
-      author
-      image
-      title
-      summary
-      content
-      url
-      published
-      categories
-      feed {
-        name
-        url
-        scheme
-      }
-    }
-  }
-`
-
 const Header = () => {
   const router = useRouter()
   const type = last(split(router && router.asPath, '/', 2))
-  const isIncludesType = includes(['feeds', 'nodes', ''], type)
+  const isIncludesType = includes(['feeds', 'nodes', 'stars', ''], type)
   const id = get(router, ['query', 'id'])
   const queries = () => {
     switch (type) {
@@ -63,6 +42,7 @@ const Header = () => {
         typeName: 'feed',
         query: GET_FEED,
         label: 'Feed',
+        colName: 'name',
         variables: { id }
       }
     case 'nodes':
@@ -70,25 +50,42 @@ const Header = () => {
         typeName: 'node',
         query: GET_NODE,
         label: 'Node',
+        colName: 'label',
         variables: { id }
+      }
+    case 'stars':
+      return {
+        typeName: null,
+        query: null,
+        colName: null,
+        label: 'Stars',
+        variables: {}
       }
     default:
       return {
-        typeName: 'allEntries',
-        query: ALL_ENTRIES,
+        typeName: null,
+        query: null,
+        colName: null,
         label: 'Today',
         variables: {}
       }
     }
   }
-  const { query, typeName, label, variables } = queries()
+  const { query, typeName, label, variables, colName } = queries()
+  const doQuery = (q) => {
+    if (q) {
+      // eslint-disable-next-line
+      return useQuery(q, { variables })
+    }
+    return { data: null, loading: false }
+  }
 
-  const { data, loading } = useQuery(query, { variables })
+  const { data, loading } = doQuery(query)
 
   const name = () => {
     if (loading) return 'Loading...'
 
-    return data[typeName].name || data[typeName].label || label
+    return get(data, [typeName, colName], label)
   }
 
   const renderName = () => {

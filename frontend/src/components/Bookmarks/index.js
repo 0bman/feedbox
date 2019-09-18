@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 
 import NewsCard from '../Shared/NewsCard'
 
-const ALL_ENTRIES = gql`
+const ENTRIES_BY_BOOKMARKS = gql`
   query {
-    allEntries {
+    entriesByBookmarks {
       id
       author
       image
@@ -25,12 +25,12 @@ const ALL_ENTRIES = gql`
   }
 `
 
-const Home = () => {
-  const { data, loading } = useQuery(ALL_ENTRIES)
+const Bookmarks = () => {
+  const { data, loading } = useQuery(ENTRIES_BY_BOOKMARKS)
 
   if (loading) return <span>Loading...</span>
 
-  return <NewsCard entries={data.allEntries} isRenderFeedName />
+  return <NewsCard entries={data.entriesByBookmarks} isRenderFeedName />
 }
 
-export default Home
+export default Bookmarks

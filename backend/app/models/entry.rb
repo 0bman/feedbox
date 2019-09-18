@@ -2,6 +2,7 @@
 
 class Entry < ApplicationRecord
   belongs_to :feed
+  has_many :bookmarks
 
   validates :feed_id, presence: true
   validates :url, :link, uniqueness: true, allow_blank: true

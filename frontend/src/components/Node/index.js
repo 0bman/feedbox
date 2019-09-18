@@ -19,6 +19,7 @@ const GET_FEED_LISTS = gql`
       url
       published
       categories
+      bookmarked
       feed {
         name
         url

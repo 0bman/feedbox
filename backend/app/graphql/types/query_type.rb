@@ -40,8 +40,8 @@ module Types
       node = current_user.nodes.find(node_id)
       node.entries
           .includes(:feed)
-          .select(columns(lookahead).push(:feed_id))
           .order(published: :desc)
+          .select(select_entry_columns(lookahead))
     end
 
     field :feed, FeedType, null: false, extras: [:lookahead] do
@@ -62,7 +62,7 @@ module Types
 
     def entries(feed_id:, lookahead:)
       Entry.includes(:feed)
-           .select(columns(lookahead).push(:feed_id))
+           .select(select_entry_columns(lookahead))
            .where(feed_id: feed_id)
            .order(published: :desc)
     end
@@ -76,7 +76,22 @@ module Types
         .includes(:feed)
         .where(id: current_user.entry_ids)
         .order(published: :desc)
-        .select(columns(lookahead).push(:feed_id))
+        .select(select_entry_columns(lookahead))
+    end
+
+    field :entries_by_bookmarks,
+          [EntryType],
+          null: false,
+          extras: [:lookahead] do
+      description 'Get entries by bookmarks'
+    end
+
+    def entries_by_bookmarks(lookahead:)
+      Entry
+        .includes(:feed)
+        .where(id: current_user.bookmarks.pluck(:entry_id))
+        .order(published: :desc)
+        .select(select_entry_columns(lookahead))
     end
 
     private
@@ -94,6 +109,12 @@ module Types
 
       cols.delete(:__typename)
       cols.presence || selections
+    end
+
+    def select_entry_columns(lookahead)
+      select = columns(lookahead).push(:feed_id)
+      select.delete(:bookmarked)
+      select
     end
 
     def current_user

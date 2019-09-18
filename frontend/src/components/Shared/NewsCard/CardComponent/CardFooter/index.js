@@ -2,10 +2,33 @@ import PropTypes from 'prop-types'
 import {
   Icon, Menu, MenuItem, MenuDivider, Popover, Position, AnchorButton
 } from '@blueprintjs/core'
+import { useMutation } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import { useState } from 'react'
 
 import './index.scss'
 
-const CardFooter = ({ url }) => {
+const CREATE_BOOKMARK = gql`
+  mutation($entryId: ID!) {
+    toggleBookmark(input: { attributes: { entryId: $entryId } }) {
+      message
+
+      errors {
+        fullMessages
+      }
+    }
+  }
+`
+
+const CardFooter = ({ url, entry }) => {
+  const [currentEntry, setEntry] = useState({ ...entry })
+  const [toggleBookmark] = useMutation(CREATE_BOOKMARK, {
+    onCompleted: () => {
+      setEntry({ ...currentEntry, bookmarked: !currentEntry.bookmarked })
+    }
+  })
+  const starIcon = currentEntry.bookmarked ? 'star' : 'star-empty'
+
   const menu = (
     <Menu>
       <MenuItem icon='graph' text='Graph' />
@@ -26,9 +49,19 @@ const CardFooter = ({ url }) => {
     window.open(url)
   }
 
+  const onClickBookmark = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    toggleBookmark({ variables: { entryId: currentEntry.id } })
+  }
+
   return (
     <div className='card__footer'>
       <div>
+        <AnchorButton minimal onClick={onClickBookmark} small>
+          <Icon icon={starIcon} iconSize={14} />
+        </AnchorButton>
         <AnchorButton minimal onClick={onClickShare} small>
           <Icon icon='share' iconSize={14} />
         </AnchorButton>
@@ -43,7 +76,8 @@ const CardFooter = ({ url }) => {
 }
 
 CardFooter.propTypes = {
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  entry: PropTypes.object.isRequired
 }
 
 export default CardFooter
